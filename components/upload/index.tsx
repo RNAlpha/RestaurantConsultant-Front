@@ -13,6 +13,7 @@ import {
 export function ImageUploadPrompt({
   prompt,
   onChange,
+  submit,
 }: ImageUploadPromptProps) {
   const bop = useRef(new Animated.Value(0.2)).current;
   const [btActivated, setBtActivated] = useState<boolean>(false);
@@ -37,6 +38,7 @@ export function ImageUploadPrompt({
   const submitAction = useCallback(() => {
     if (!prompt) return;
     Keyboard.dismiss();
+    submit(prompt);
     onChange("");
   }, [prompt]);
 

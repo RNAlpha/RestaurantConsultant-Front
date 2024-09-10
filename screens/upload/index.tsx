@@ -33,6 +33,8 @@ export default function UploadScreen() {
   const [image, setImage] = useState<string | null>(null);
   const [prompt, setPrompt] = useState<string>("");
 
+  const [submittedPrompt, setSubmittedPrompt] = useState<string>("");
+
   const imageOption: ImagePicker.ImagePickerOptions = useMemo(() => {
     return {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -104,10 +106,16 @@ export default function UploadScreen() {
                 />
               )}
             </TouchableOpacity>
+            <View style={style["prompt-preview"]}>
+              <Text style={style["prompt-preview-text"]}>
+                {submittedPrompt}
+              </Text>
+            </View>
           </View>
           <ImageUploadPrompt
             prompt={prompt}
             onChange={(prompt) => setPrompt(prompt)}
+            submit={(prompt) => setSubmittedPrompt(prompt)}
           />
 
           <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>

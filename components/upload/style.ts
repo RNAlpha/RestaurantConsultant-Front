@@ -15,6 +15,7 @@ export const ImagePromptStyle = {
     borderRadius: 10,
     flexDirection: "row",
     maxHeight: 100,
+    backgroundColor: "white",
   },
   "image-prompt": {
     flex: 9,
