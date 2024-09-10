@@ -4,3 +4,5 @@ export const ASSETS = {
   input: "#acacac",
   pale: "#EDEDED",
 };
+
+export const UPLOAD_IMAGE_AR = 4 / 3;

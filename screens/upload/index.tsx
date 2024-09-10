@@ -21,7 +21,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
-import { ASSETS } from "../../assets/assets";
+import { ASSETS } from "@_assets/assets";
+import { ImageUploadPrompt } from "@_components/upload/index";
 
 export default function UploadScreen() {
   const { width } = useWindowDimensions();
@@ -101,20 +102,7 @@ export default function UploadScreen() {
               )}
             </TouchableOpacity>
           </View>
-          <View style={style["image-prompt-container"]}>
-            <TextInput
-              style={style["image-prompt"]}
-              placeholder="AI에게 요구할 사항들을 적어보세요!"
-              multiline
-            ></TextInput>
-            <Pressable style={{ alignSelf: "flex-end" }}>
-              <Entypo
-                name="arrow-with-circle-up"
-                size={24}
-                color={ASSETS.main}
-              />
-            </Pressable>
-          </View>
+          <ImageUploadPrompt />
 
           <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
             <BottomSheetView style={[style["bottom-sheet-view"]]}>

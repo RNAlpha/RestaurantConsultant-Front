@@ -15,10 +15,7 @@ type UploadStyleKey =
   | "upload-button-text"
   | "bottom-sheet-view"
   | "bottom-sheet-button"
-  | "image-preview"
-  | "image-prompt"
-  | "image-prompt-container"
-  | "image-prompt-submit";
+  | "image-preview";
 
 const UPLOAD_IMAGE_AR = 4 / 3;
 
@@ -83,27 +80,11 @@ export const UploadStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   "image-preview": {
     width: "100%",
     aspectRatio: UPLOAD_IMAGE_AR,
     borderRadius: 10,
   },
-  "image-prompt-container": {
-    width: "100%",
-    borderColor: ASSETS.input,
-    borderWidth: 0.3,
-    padding: 14,
-    borderRadius: 10,
-    flexDirection: "row",
-    maxHeight: 100,
-  },
-  "image-prompt": {
-    flex: 9,
-
-    height: "100%",
-  },
-  "image-prompt-submit": { alignSelf: "flex-end" },
 }) satisfies Record<
   UploadStyleKey,
   StyleProp<ViewStyle | TextStyle | ImageStyle>
