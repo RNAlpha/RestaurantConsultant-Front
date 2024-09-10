@@ -30,6 +30,7 @@ import {
   SubmitButton,
 } from "@_components/upload/index";
 import { ContainerWithHeader } from "@_layout/index";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function UploadScreen({
   navigation,
@@ -82,47 +83,49 @@ export default function UploadScreen({
     <BottomSheetModalProvider>
       <ContainerWithHeader<"upload"> navigation={navigation}>
         <KeyboardAvoidingView style={style.container} behavior="height">
-          <Pressable
-            style={style["upload-preview-container"]}
-            onPress={() => {
-              Keyboard.dismiss();
-              bottomSheetDismiss();
-            }}
-          >
-            <TouchableOpacity
-              style={style["upload-preview"]}
+          <ScrollView>
+            <Pressable
+              style={style["upload-preview-container"]}
               onPress={() => {
                 Keyboard.dismiss();
-                bottomSheetPresent();
+                bottomSheetDismiss();
               }}
             >
-              {!image ? (
-                <>
-                  <Fontisto
-                    name="photograph"
-                    size={width * 0.3}
-                    color="green"
+              <TouchableOpacity
+                style={style["upload-preview"]}
+                onPress={() => {
+                  Keyboard.dismiss();
+                  bottomSheetPresent();
+                }}
+              >
+                {!image ? (
+                  <>
+                    <Fontisto
+                      name="photograph"
+                      size={width * 0.3}
+                      color="green"
+                    />
+                    <Text
+                      style={[
+                        style["upload-button-text"],
+                        { fontSize: width * 0.05 },
+                      ]}
+                    >
+                      매장의 사진을 추가해보세요!
+                    </Text>
+                  </>
+                ) : (
+                  <Image
+                    source={{ uri: image }}
+                    style={style["image-preview"]}
+                    contentFit="cover"
                   />
-                  <Text
-                    style={[
-                      style["upload-button-text"],
-                      { fontSize: width * 0.05 },
-                    ]}
-                  >
-                    매장의 사진을 추가해보세요!
-                  </Text>
-                </>
-              ) : (
-                <Image
-                  source={{ uri: image }}
-                  style={style["image-preview"]}
-                  contentFit="cover"
-                />
-              )}
-            </TouchableOpacity>
-            {submittedPrompt && <PromptPreview prompt={submittedPrompt} />}
-            {submittedPrompt && image && <SubmitButton />}
-          </Pressable>
+                )}
+              </TouchableOpacity>
+              {submittedPrompt && <PromptPreview prompt={submittedPrompt} />}
+              {submittedPrompt && image && <SubmitButton />}
+            </Pressable>
+          </ScrollView>
           <ImageUploadPrompt
             prompt={prompt}
             onChange={(prompt) => setPrompt(prompt)}
