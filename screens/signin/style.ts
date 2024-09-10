@@ -14,13 +14,6 @@ type SignInStyleKey =
   | "signup-button-text"
   | "signup-button-bottom-border";
 
-// type SignInStyle = {
-//   container: StyleProp<ViewStyle>;
-//   "signin-wrapper": StyleProp<ViewStyle>;
-//   signInInput: StyleProp<ViewStyle>;
-//   "signin-button": StyleProp<ViewStyle>;
-// };
-
 type SignInStyle = Record<SignInStyleKey, StyleProp<ViewStyle | TextStyle>>;
 
 export const SignInStyle: SignInStyle = StyleSheet.create({
