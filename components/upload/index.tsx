@@ -74,7 +74,7 @@ export function ImageUploadPrompt({
         value={prompt}
         onChangeText={(e) => onChange(e)}
       ></TextInput>
-      <Pressable onPress={submitAction}>
+      <Pressable onPress={submitAction} style={{ alignSelf: "flex-end" }}>
         <Animated.View style={[IPS["image-prompt-submit"], { opacity: bop }]}>
           <Entypo name="arrow-with-circle-up" size={24} color={ASSETS.main} />
         </Animated.View>
@@ -87,7 +87,7 @@ export function SubmitButton() {
   return (
     <FloatElementUI>
       <TouchableOpacity style={[SBS["submit-button"]]}>
-        <Text style={SBS["submit-button-text"]}>adadadd</Text>
+        <Text style={SBS["submit-button-text"]}>AI 컨설팅 받기</Text>
       </TouchableOpacity>
     </FloatElementUI>
   );

@@ -26,7 +26,7 @@ export const ImagePromptStyle = {
 
     height: "100%",
   },
-  "image-prompt-submit": { alignSelf: "flex-end" },
+  "image-prompt-submit": {},
 } satisfies Record<ImagePromptStyleKey, StyleProp<ViewStyle>>;
 
 export const SubmitButtonStyle = {

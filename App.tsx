@@ -1,5 +1,5 @@
-import { StyleSheet, Text } from "react-native";
-import AppFrame from "./layout";
+import { StyleSheet } from "react-native";
+import { AppFrame } from "./layout";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignInScreen from "./screens/signin";
