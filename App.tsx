@@ -3,8 +3,10 @@ import AppFrame from "./layout";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignInScreen from "./screens/signin";
+import UploadScreen from "./screens/upload";
+import { RootStackParamList } from "./screens/type";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -15,6 +17,7 @@ export default function App() {
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="signin" component={SignInScreen} />
+          <Stack.Screen name="upload" component={UploadScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppFrame>
