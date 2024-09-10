@@ -1,10 +1,12 @@
-import { StyleProp, ViewStyle } from "react-native";
+import { Dimensions, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { ASSETS, UPLOAD_IMAGE_AR } from "../../assets/assets";
 
 type ImagePromptStyleKey =
   | "image-prompt-container"
   | "image-prompt"
   | "image-prompt-submit";
+
+type SubmitButtonStyleKey = "submit-button" | "submit-button-text";
 
 export const ImagePromptStyle = {
   "image-prompt-container": {
@@ -24,3 +26,17 @@ export const ImagePromptStyle = {
   },
   "image-prompt-submit": { alignSelf: "flex-end" },
 } satisfies Record<ImagePromptStyleKey, StyleProp<ViewStyle>>;
+
+export const SubmitButtonStyle = {
+  "submit-button": {
+    padding: 10,
+    paddingHorizontal: 20,
+    backgroundColor: ASSETS.main,
+    bottom: Dimensions.get("screen").height * 0.2,
+    borderRadius: 8,
+  },
+  "submit-button-text": {
+    color: "white",
+    fontWeight: "500",
+  },
+} satisfies Record<SubmitButtonStyleKey, StyleProp<ViewStyle | TextStyle>>;

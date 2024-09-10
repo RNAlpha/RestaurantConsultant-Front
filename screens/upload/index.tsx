@@ -3,7 +3,6 @@ import {
   TouchableOpacity,
   Text,
   useWindowDimensions,
-  TextInput,
   KeyboardAvoidingView,
   Keyboard,
   Pressable,
@@ -22,11 +21,10 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
-import { ImageUploadPrompt } from "@_components/upload/index";
-import { ASSETS } from "@_assets/assets";
+import { ImageUploadPrompt, SubmitButton } from "@_components/upload/index";
 
 export default function UploadScreen() {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -73,6 +71,18 @@ export default function UploadScreen() {
   return (
     <BottomSheetModalProvider>
       <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+        <View
+          style={{
+            position: "absolute",
+            flex: 1,
+            width: "100%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          {submittedPrompt && <SubmitButton />}
+        </View>
         <KeyboardAvoidingView style={style.container} behavior="height">
           <View style={style["upload-preview-container"]}>
             <TouchableOpacity
@@ -106,11 +116,13 @@ export default function UploadScreen() {
                 />
               )}
             </TouchableOpacity>
-            <View style={style["prompt-preview"]}>
-              <Text style={style["prompt-preview-text"]}>
-                {submittedPrompt}
-              </Text>
-            </View>
+            {submittedPrompt && (
+              <TouchableOpacity style={style["prompt-preview"]}>
+                <Text style={style["prompt-preview-text"]}>
+                  {submittedPrompt}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
           <ImageUploadPrompt
             prompt={prompt}

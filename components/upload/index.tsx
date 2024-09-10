@@ -1,6 +1,14 @@
-import { View, TextInput, Pressable, Animated, Keyboard } from "react-native";
+import {
+  View,
+  TextInput,
+  Pressable,
+  Animated,
+  Keyboard,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import { ImagePromptStyle as IPS } from "./style";
+import { ImagePromptStyle as IPS, SubmitButtonStyle as SBS } from "./style";
 import { ASSETS } from "@_assets/assets";
 import { ImageUploadPromptProps } from "./type";
 import {
@@ -67,5 +75,37 @@ export function ImageUploadPrompt({
         </Animated.View>
       </Pressable>
     </View>
+  );
+}
+
+export function SubmitButton() {
+  const opacity = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(20)).current;
+
+  const duration = 1000;
+
+  const float = () => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    float();
+  }, []);
+
+  return (
+    <TouchableOpacity
+      style={[SBS["submit-button"], { opacity, transform: [{ translateY }] }]}
+    >
+      <Text style={SBS["submit-button-text"]}>adadadd</Text>
+    </TouchableOpacity>
   );
 }
