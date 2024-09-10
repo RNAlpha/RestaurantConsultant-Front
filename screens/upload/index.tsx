@@ -23,6 +23,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
 import { ImageUploadPrompt } from "@_components/upload/index";
+import { ASSETS } from "@_assets/assets";
 
 export default function UploadScreen() {
   const { width } = useWindowDimensions();
@@ -115,8 +116,10 @@ export default function UploadScreen() {
                 style={style["bottom-sheet-button"]}
                 onPress={() => openCamera()}
               >
-                <Feather name="camera" size={width * 0.2} color="black" />
-                <Text>사진을 찍어보세요!</Text>
+                <Feather name="camera" size={width * 0.2} color={"green"} />
+                <Text style={style["bottom-sheet-button-text"]}>
+                  사진을 찍어보세요!
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={style["bottom-sheet-button"]}
@@ -124,8 +127,10 @@ export default function UploadScreen() {
                   openImageLibrary();
                 }}
               >
-                <FontAwesome name="photo" size={width * 0.2} color="black" />
-                <Text>사진을 선택하세요!</Text>
+                <FontAwesome name="photo" size={width * 0.2} color={"green"} />
+                <Text style={style["bottom-sheet-button-text"]}>
+                  사진을 선택하세요!
+                </Text>
               </TouchableOpacity>
             </BottomSheetView>
           </BottomSheetModal>

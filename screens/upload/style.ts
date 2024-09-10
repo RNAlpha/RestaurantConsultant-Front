@@ -15,6 +15,7 @@ type UploadStyleKey =
   | "upload-button-text"
   | "bottom-sheet-view"
   | "bottom-sheet-button"
+  | "bottom-sheet-button-text"
   | "image-preview";
 
 const UPLOAD_IMAGE_AR = 4 / 3;
@@ -79,6 +80,10 @@ export const UploadStyle = StyleSheet.create({
     backgroundColor: ASSETS.pale,
     justifyContent: "center",
     alignItems: "center",
+  },
+  "bottom-sheet-button-text": {
+    color: ASSETS.main,
+    fontWeight: "bold",
   },
   "image-preview": {
     width: "100%",
