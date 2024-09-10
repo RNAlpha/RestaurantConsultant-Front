@@ -13,7 +13,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <GestureHandlerRootView>
-      <Camera />
       <AppFrame>
         <NavigationContainer>
           <Stack.Navigator

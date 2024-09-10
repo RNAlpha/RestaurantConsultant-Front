@@ -7,3 +7,5 @@ const style: Record<CameraStyleKey, StyleProp<ViewStyle>> = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default style;
