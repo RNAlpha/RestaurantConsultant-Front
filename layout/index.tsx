@@ -4,6 +4,8 @@ import Header from "@_components/header/header";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { RootStackParamList } from "@_screens/type";
+import { ContainerWithHeaderProps } from "./type";
 
 export function AppFrame({ children }: React.PropsWithChildren) {
   return (
@@ -14,11 +16,14 @@ export function AppFrame({ children }: React.PropsWithChildren) {
   );
 }
 
-export function ContainerWithHeader({ children }: React.PropsWithChildren) {
+export function ContainerWithHeader<T extends keyof RootStackParamList>({
+  children,
+  navigation,
+}: ContainerWithHeaderProps<T>) {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, width: "100%" }}>
       <Header>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back-outline" size={30} color="white" />
         </TouchableOpacity>
         <Text style={{ color: "white", fontSize: 20 }}>ConsultArtist</Text>
@@ -26,7 +31,7 @@ export function ContainerWithHeader({ children }: React.PropsWithChildren) {
           <AntDesign name="user" size={30} color="white" />
         </TouchableOpacity>
       </Header>
-      {children}
+      <>{children}</>
     </View>
   );
 }

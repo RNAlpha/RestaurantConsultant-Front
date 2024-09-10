@@ -18,6 +18,9 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@_screens/type";
+
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
@@ -28,7 +31,9 @@ import {
 } from "@_components/upload/index";
 import { ContainerWithHeader } from "@_layout/index";
 
-export default function UploadScreen() {
+export default function UploadScreen({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList, "upload">) {
   const { width, height } = useWindowDimensions();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -75,91 +80,80 @@ export default function UploadScreen() {
 
   return (
     <BottomSheetModalProvider>
-      <ContainerWithHeader>
-        <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-          <View
-            style={{
-              position: "absolute",
-              flex: 1,
-              width: "100%",
-              height: "100%",
-              alignItems: "center",
-              justifyContent: "flex-end",
+      <ContainerWithHeader<"upload"> navigation={navigation}>
+        <KeyboardAvoidingView style={style.container} behavior="height">
+          <Pressable
+            style={style["upload-preview-container"]}
+            onPress={() => {
+              Keyboard.dismiss();
+              bottomSheetDismiss();
             }}
           >
+            <TouchableOpacity
+              style={style["upload-preview"]}
+              onPress={() => {
+                Keyboard.dismiss();
+                bottomSheetPresent();
+              }}
+            >
+              {!image ? (
+                <>
+                  <Fontisto
+                    name="photograph"
+                    size={width * 0.3}
+                    color="green"
+                  />
+                  <Text
+                    style={[
+                      style["upload-button-text"],
+                      { fontSize: width * 0.05 },
+                    ]}
+                  >
+                    매장의 사진을 추가해보세요!
+                  </Text>
+                </>
+              ) : (
+                <Image
+                  source={{ uri: image }}
+                  style={style["image-preview"]}
+                  contentFit="cover"
+                />
+              )}
+            </TouchableOpacity>
+            {submittedPrompt && <PromptPreview prompt={submittedPrompt} />}
             {submittedPrompt && image && <SubmitButton />}
-          </View>
-          <KeyboardAvoidingView style={style.container} behavior="height">
-            <View style={style["upload-preview-container"]}>
+          </Pressable>
+          <ImageUploadPrompt
+            prompt={prompt}
+            onChange={(prompt) => setPrompt(prompt)}
+            submit={(prompt) => setSubmittedPrompt(prompt)}
+          />
+
+          <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
+            <BottomSheetView style={[style["bottom-sheet-view"]]}>
               <TouchableOpacity
-                style={style["upload-preview"]}
+                style={style["bottom-sheet-button"]}
+                onPress={() => openCamera()}
+              >
+                <Feather name="camera" size={width * 0.2} color={"green"} />
+                <Text style={style["bottom-sheet-button-text"]}>
+                  사진을 찍어보세요!
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={style["bottom-sheet-button"]}
                 onPress={() => {
-                  Keyboard.dismiss();
-                  bottomSheetPresent();
+                  openImageLibrary();
                 }}
               >
-                {!image ? (
-                  <>
-                    <Fontisto
-                      name="photograph"
-                      size={width * 0.3}
-                      color="green"
-                    />
-                    <Text
-                      style={[
-                        style["upload-button-text"],
-                        { fontSize: width * 0.05 },
-                      ]}
-                    >
-                      매장의 사진을 추가해보세요!
-                    </Text>
-                  </>
-                ) : (
-                  <Image
-                    source={{ uri: image }}
-                    style={style["image-preview"]}
-                    contentFit="cover"
-                  />
-                )}
+                <FontAwesome name="photo" size={width * 0.2} color={"green"} />
+                <Text style={style["bottom-sheet-button-text"]}>
+                  사진을 선택하세요!
+                </Text>
               </TouchableOpacity>
-              {submittedPrompt && <PromptPreview prompt={submittedPrompt} />}
-            </View>
-            <ImageUploadPrompt
-              prompt={prompt}
-              onChange={(prompt) => setPrompt(prompt)}
-              submit={(prompt) => setSubmittedPrompt(prompt)}
-            />
-
-            <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
-              <BottomSheetView style={[style["bottom-sheet-view"]]}>
-                <TouchableOpacity
-                  style={style["bottom-sheet-button"]}
-                  onPress={() => openCamera()}
-                >
-                  <Feather name="camera" size={width * 0.2} color={"green"} />
-                  <Text style={style["bottom-sheet-button-text"]}>
-                    사진을 찍어보세요!
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={style["bottom-sheet-button"]}
-                  onPress={() => {
-                    openImageLibrary();
-                  }}
-                >
-                  <FontAwesome
-                    name="photo"
-                    size={width * 0.2}
-                    color={"green"}
-                  />
-                  <Text style={style["bottom-sheet-button-text"]}>
-                    사진을 선택하세요!
-                  </Text>
-                </TouchableOpacity>
-              </BottomSheetView>
-            </BottomSheetModal>
-          </KeyboardAvoidingView>
-        </Pressable>
+            </BottomSheetView>
+          </BottomSheetModal>
+        </KeyboardAvoidingView>
       </ContainerWithHeader>
     </BottomSheetModalProvider>
   );

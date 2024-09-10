@@ -34,7 +34,7 @@ export const SubmitButtonStyle = {
     padding: 10,
     paddingHorizontal: 20,
     backgroundColor: ASSETS.main,
-    bottom: Dimensions.get("screen").height * 0.2,
+    marginTop: 20,
     borderRadius: 8,
   },
   "submit-button-text": {
