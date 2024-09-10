@@ -21,7 +21,11 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
-import { ImageUploadPrompt, SubmitButton } from "@_components/upload/index";
+import {
+  ImageUploadPrompt,
+  PromptPreview,
+  SubmitButton,
+} from "@_components/upload/index";
 
 export default function UploadScreen() {
   const { width, height } = useWindowDimensions();
@@ -116,13 +120,7 @@ export default function UploadScreen() {
                 />
               )}
             </TouchableOpacity>
-            {submittedPrompt && (
-              <TouchableOpacity style={style["prompt-preview"]}>
-                <Text style={style["prompt-preview-text"]}>
-                  {submittedPrompt}
-                </Text>
-              </TouchableOpacity>
-            )}
+            {submittedPrompt && <PromptPreview prompt={submittedPrompt} />}
           </View>
           <ImageUploadPrompt
             prompt={prompt}

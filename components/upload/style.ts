@@ -8,6 +8,8 @@ type ImagePromptStyleKey =
 
 type SubmitButtonStyleKey = "submit-button" | "submit-button-text";
 
+type PromptPreviewStyleKey = "prompt-preview" | "prompt-preview-text";
+
 export const ImagePromptStyle = {
   "image-prompt-container": {
     width: "100%",
@@ -40,3 +42,19 @@ export const SubmitButtonStyle = {
     fontWeight: "500",
   },
 } satisfies Record<SubmitButtonStyleKey, StyleProp<ViewStyle | TextStyle>>;
+
+export const PromptPreviewStyle = {
+  "prompt-preview": {
+    width: "90%",
+    borderWidth: 0.3,
+    borderColor: ASSETS.main,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    marginTop: 20,
+    borderRadius: 5,
+    backgroundColor: ASSETS.sub,
+  },
+  "prompt-preview-text": {
+    fontSize: 20,
+  },
+} satisfies Record<PromptPreviewStyleKey, StyleProp<ViewStyle | TextStyle>>;

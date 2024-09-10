@@ -16,8 +16,7 @@ type UploadStyleKey =
   | "bottom-sheet-view"
   | "bottom-sheet-button"
   | "bottom-sheet-button-text"
-  | "image-preview"
-  | "prompt-preview";
+  | "image-preview";
 
 const UPLOAD_IMAGE_AR = 4 / 3;
 
@@ -90,19 +89,6 @@ export const UploadStyle = StyleSheet.create({
     width: "100%",
     aspectRatio: UPLOAD_IMAGE_AR,
     borderRadius: 10,
-  },
-  "prompt-preview": {
-    width: "90%",
-    borderWidth: 0.3,
-    borderColor: ASSETS.main,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-    marginTop: 20,
-    borderRadius: 5,
-    backgroundColor: ASSETS.sub,
-  },
-  "prompt-preview-text": {
-    fontSize: 20,
   },
 }) satisfies Record<
   UploadStyleKey,

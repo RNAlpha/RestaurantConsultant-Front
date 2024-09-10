@@ -8,9 +8,13 @@ import {
   Text,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
-import { ImagePromptStyle as IPS, SubmitButtonStyle as SBS } from "./style";
+import {
+  ImagePromptStyle as IPS,
+  SubmitButtonStyle as SBS,
+  PromptPreviewStyle as PPS,
+} from "./style";
 import { ASSETS } from "@_assets/assets";
-import { ImageUploadPromptProps } from "./type";
+import { ImageUploadPromptProps, PromptPreviewProps } from "./type";
 import {
   useCallback,
   useDeferredValue,
@@ -18,6 +22,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { FloatElementUI } from "@_components/UI/Float";
 export function ImageUploadPrompt({
   prompt,
   onChange,
@@ -79,33 +84,21 @@ export function ImageUploadPrompt({
 }
 
 export function SubmitButton() {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(20)).current;
-
-  const duration = 1000;
-
-  const float = () => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(translateY, {
-      toValue: 0,
-      duration,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  useEffect(() => {
-    float();
-  }, []);
-
   return (
-    <TouchableOpacity
-      style={[SBS["submit-button"], { opacity, transform: [{ translateY }] }]}
-    >
-      <Text style={SBS["submit-button-text"]}>adadadd</Text>
-    </TouchableOpacity>
+    <FloatElementUI>
+      <TouchableOpacity style={[SBS["submit-button"]]}>
+        <Text style={SBS["submit-button-text"]}>adadadd</Text>
+      </TouchableOpacity>
+    </FloatElementUI>
+  );
+}
+
+export function PromptPreview({ prompt }: PromptPreviewProps) {
+  return (
+    <FloatElementUI>
+      <TouchableOpacity style={PPS["prompt-preview"]}>
+        <Text style={PPS["prompt-preview-text"]}>{prompt}</Text>
+      </TouchableOpacity>
+    </FloatElementUI>
   );
 }

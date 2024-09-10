@@ -3,3 +3,7 @@ export interface ImageUploadPromptProps {
   onChange: (prompt: string) => void;
   submit: (prompt: string) => void;
 }
+
+export interface PromptPreviewProps {
+  prompt: string;
+}
