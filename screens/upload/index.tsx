@@ -30,6 +30,8 @@ export default function UploadScreen() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const [image, setImage] = useState<string | null>(null);
+  const [prompt, setPrompt] = useState<string>("");
+
   const imageOption: ImagePicker.ImagePickerOptions = useMemo(() => {
     return {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -102,7 +104,10 @@ export default function UploadScreen() {
               )}
             </TouchableOpacity>
           </View>
-          <ImageUploadPrompt />
+          <ImageUploadPrompt
+            prompt={prompt}
+            onChange={(prompt) => setPrompt(prompt)}
+          />
 
           <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
             <BottomSheetView style={[style["bottom-sheet-view"]]}>
