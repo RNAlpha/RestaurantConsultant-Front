@@ -1,4 +1,4 @@
-import { View, TextInput, Pressable, Animated } from "react-native";
+import { View, TextInput, Pressable, Animated, Keyboard } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import { ImagePromptStyle as IPS } from "./style";
 import { ASSETS } from "@_assets/assets";
@@ -34,6 +34,12 @@ export function ImageUploadPrompt({
     }).start();
   }, []);
 
+  const submitAction = useCallback(() => {
+    if (!prompt) return;
+    Keyboard.dismiss();
+    onChange("");
+  }, [prompt]);
+
   useEffect(() => {
     if (prompt && !dfBtActivated) setBtActivated(true);
     else if (!prompt && dfBtActivated) setBtActivated(false);
@@ -53,7 +59,7 @@ export function ImageUploadPrompt({
         value={prompt}
         onChangeText={(e) => onChange(e)}
       ></TextInput>
-      <Pressable>
+      <Pressable onPress={submitAction}>
         <Animated.View style={[IPS["image-prompt-submit"], { opacity: bop }]}>
           <Entypo name="arrow-with-circle-up" size={24} color={ASSETS.main} />
         </Animated.View>
