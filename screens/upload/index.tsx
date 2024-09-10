@@ -18,10 +18,10 @@ import {
 import { useCallback, useMemo, useRef, useState } from "react";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import Entypo from "@expo/vector-icons/Entypo";
+
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
-import { ASSETS } from "@_assets/assets";
+
 import { ImageUploadPrompt } from "@_components/upload/index";
 
 export default function UploadScreen() {
