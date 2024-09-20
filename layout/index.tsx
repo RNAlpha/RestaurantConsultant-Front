@@ -23,7 +23,11 @@ export function ContainerWithHeader<T extends keyof RootStackParamList>({
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <Header>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
           <Ionicons name="arrow-back-outline" size={30} color="white" />
         </TouchableOpacity>
         <Text style={{ color: "white", fontSize: 20 }}>ConsultArtist</Text>

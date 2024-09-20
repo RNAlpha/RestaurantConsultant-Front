@@ -7,15 +7,16 @@ export default function Header({ children }: React.PropsWithChildren) {
       style={{
         width: "100%",
         backgroundColor: ASSETS.main,
-        alignItems: "center",
+        alignItems: "flex-end",
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical: 25,
+        paddingBottom: 12,
         paddingHorizontal: 20,
         zIndex: 10,
+        height: 90,
       }}
     >
-      {children}
+      <>{children}</>
     </View>
   );
 }

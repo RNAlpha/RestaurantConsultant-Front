@@ -7,6 +7,7 @@ import UploadScreen from "./screens/upload";
 import { RootStackParamList } from "./screens/type";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Camera from "./components/camera";
+import SignUpScreen from "@_screens/signup";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,6 +22,7 @@ export default function App() {
           >
             <Stack.Screen name="signin" component={SignInScreen} />
             <Stack.Screen name="upload" component={UploadScreen} />
+            <Stack.Screen name="signup" component={SignUpScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </AppFrame>
