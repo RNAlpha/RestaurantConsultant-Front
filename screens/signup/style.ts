@@ -1,4 +1,10 @@
-import { StyleProp, ViewStyle, TextStyle, StyleSheet } from "react-native";
+import {
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { ASSETS } from "@_assets/assets";
 
 type SignUpStyleKey =
@@ -7,7 +13,8 @@ type SignUpStyleKey =
   | "signup-wrapper"
   | "signup-input"
   | "signup-button"
-  | "signup-button-text";
+  | "signup-button-text"
+  | "signup-header";
 
 type SignUpStyle = Record<SignUpStyleKey, StyleProp<ViewStyle | TextStyle>>;
 
@@ -18,14 +25,14 @@ export const style: SignUpStyle = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
 
     alignItems: "center",
   },
   "signup-wrapper": {
     width: "70%",
     justifyContent: "flex-start",
-
+    marginTop: Dimensions.get("screen").height * 0.1,
     alignItems: "center",
   },
   "signup-input": {
@@ -46,5 +53,8 @@ export const style: SignUpStyle = StyleSheet.create({
   "signup-button-text": {
     color: "white",
     textAlign: "center",
+  },
+  "signup-header": {
+    backgroundColor: "transparent",
   },
 });

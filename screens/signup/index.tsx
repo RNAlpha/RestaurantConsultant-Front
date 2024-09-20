@@ -9,8 +9,11 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  KeyboardAvoidingView,
 } from "react-native";
 import { style } from "./style";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Header from "@_components/header/header";
 
 export default function SignUpScreen({
   navigation,
@@ -26,6 +29,12 @@ export default function SignUpScreen({
 
   return (
     <View style={style.container}>
+      <Header style={style["signup-header"]}>
+        <TouchableOpacity onPress={() => navigation.navigate("signin")}>
+          <Ionicons name="arrow-back-outline" size={30} color="black" />
+        </TouchableOpacity>
+      </Header>
+
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} hitSlop={100}>
         <View style={[style.wrapper, { width }]}>
           <View style={[style["signup-wrapper"]]}>
@@ -54,13 +63,13 @@ export default function SignUpScreen({
               keyboardType="number-pad"
               onChange={(e) => setPhoneInput(e.nativeEvent.text)}
             />
+            <TouchableOpacity
+              style={style["signup-button"]}
+              onPress={() => navigation.navigate("upload")}
+            >
+              <Text style={style["signup-button-text"]}>회원가입</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={style["signup-button"]}
-            onPress={() => navigation.navigate("upload")}
-          >
-            <Text style={style["signup-button-text"]}>회원가입</Text>
-          </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
     </View>

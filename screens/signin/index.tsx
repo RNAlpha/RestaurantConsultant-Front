@@ -65,7 +65,10 @@ export default function SignInScreen({
           </View>
           <View style={[style["signup-wrapper"]]}>
             <Text style={style["signup-caption"]}>계정이 없으신가요?</Text>
-            <TouchableOpacity style={[style["signup-button"]]}>
+            <TouchableOpacity
+              style={[style["signup-button"]]}
+              onPress={() => navigation.navigate("signup")}
+            >
               <Text style={style["signup-button-text"]}>회원가입하기</Text>
               <Animated.View
                 style={[
