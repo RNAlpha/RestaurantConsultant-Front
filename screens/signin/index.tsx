@@ -7,20 +7,29 @@ import {
   TouchableWithoutFeedback,
   Animated,
 } from "react-native";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SignInStyle as style } from "./style";
 import { RootStackParamList } from "../type";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useWindowDimensions } from "react-native";
+import { SignInData } from "api/type";
 
 export default function SignInScreen({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "signin">) {
   const { height, width } = useWindowDimensions();
 
-  const pwInput = useRef<TextInput>(null);
+  const pwInputRef = useRef<TextInput>(null);
+
+  const [usernameInput, setUserNameInput] = useState<string>("");
+  const [pwInput, setPwInput] = useState<string>("");
 
   const blink = useRef(new Animated.Value(1)).current;
+
+  const handleSignIn = async (data: SignInData) => {
+    console.log(data);
+    navigation.navigate("main");
+  };
 
   useEffect(() => {
     Animated.loop(
@@ -48,17 +57,24 @@ export default function SignInScreen({
               style={style["signin-input"]}
               placeholder="아이디를 입력하세요."
               returnKeyType="next"
-              onSubmitEditing={() => pwInput.current && pwInput.current.focus()}
+              onSubmitEditing={() =>
+                pwInputRef.current && pwInputRef.current.focus()
+              }
+              onChange={(e) => setUserNameInput(e.nativeEvent.text)}
+              autoFocus
             ></TextInput>
             <TextInput
               style={style["signin-input"]}
               placeholder="비밀번호를 입력하세요."
               secureTextEntry={true}
-              ref={pwInput}
+              ref={pwInputRef}
+              onChange={(e) => setPwInput(e.nativeEvent.text)}
             ></TextInput>
             <TouchableOpacity
               style={style["signin-button"]}
-              onPress={() => navigation.navigate("upload")}
+              onPress={() =>
+                handleSignIn({ username: usernameInput, password: pwInput })
+              }
             >
               <Text style={style["signin-button-text"]}>로그인</Text>
             </TouchableOpacity>

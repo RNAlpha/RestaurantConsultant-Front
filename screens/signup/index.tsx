@@ -14,6 +14,8 @@ import {
 import { style } from "./style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Header from "@_components/header/header";
+import { SignUpData } from "api/type";
+import { signUp } from "api/api";
 
 export default function SignUpScreen({
   navigation,
@@ -26,6 +28,12 @@ export default function SignUpScreen({
 
   const pwRef = useRef<TextInput>(null);
   const phoneRef = useRef<TextInput>(null);
+
+  const handleSignUp = async (data: SignUpData) => {
+    const signUpResponse = await signUp(data);
+    if (!signUpResponse) return;
+    return navigation.navigate("main");
+  };
 
   return (
     <View style={style.container}>
@@ -65,7 +73,13 @@ export default function SignUpScreen({
             />
             <TouchableOpacity
               style={style["signup-button"]}
-              onPress={() => navigation.navigate("upload")}
+              onPress={() =>
+                handleSignUp({
+                  username: userNameInput,
+                  password: pwInput,
+                  phoneNumber: phoneInput,
+                })
+              }
             >
               <Text style={style["signup-button-text"]}>회원가입</Text>
             </TouchableOpacity>
