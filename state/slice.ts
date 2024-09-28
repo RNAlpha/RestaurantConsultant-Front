@@ -12,7 +12,7 @@ const timer = async (time: number) =>
 export const chatQuery = createAsyncThunk(
   "AIChatSlice/chatQuery",
   async (question: string, thunkAPI) => {
-    const t = await timer(5000);
+    const t = await timer(1000);
     if (t) return "response is made";
     return "failed response";
   }

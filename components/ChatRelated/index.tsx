@@ -44,10 +44,12 @@ function ChatBubble({
       style={[
         {
           width: "auto",
+          maxWidth: "60%",
+
           borderRadius: 10,
           paddingVertical: 7,
           paddingHorizontal: 10,
-          height: 35,
+
           justifyContent: "center",
         },
         style,

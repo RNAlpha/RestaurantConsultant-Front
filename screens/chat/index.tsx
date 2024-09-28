@@ -3,7 +3,7 @@ import { RootStackParamList } from "@_screens/type";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { ContainerWithHeader } from "@_layout/index";
 import { Prompt } from "@_components/prompt";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ChatRowSet } from "@_components/ChatRelated";
 import { useSelector } from "react-redux";
 import { chatQuery } from "state/slice";
@@ -19,6 +19,8 @@ export default function ChatScreen({
 
   const [prompt, setPrompt] = useState<string>("");
 
+  const scrollViewRef = useRef<ScrollView>(null);
+
   return (
     <ContainerWithHeader navigation={navigation}>
       <KeyboardAvoidingView
@@ -29,9 +31,10 @@ export default function ChatScreen({
         behavior="height"
       >
         <ScrollView
+          ref={scrollViewRef}
+          onContentSizeChange={() => scrollViewRef.current?.scrollToEnd()}
           style={{
             paddingHorizontal: 10,
-            paddingTop: 20,
           }}
         >
           {chatData.data.map((data) => (
@@ -41,7 +44,9 @@ export default function ChatScreen({
         <Prompt
           prompt={prompt}
           onChange={(prompt) => setPrompt(prompt)}
-          submit={() => submitChat(prompt)}
+          submit={() => {
+            submitChat(prompt);
+          }}
           placeholder="AI에게 물어보고 싶은 것을 적어보세요!"
         ></Prompt>
       </KeyboardAvoidingView>
