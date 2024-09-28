@@ -3,6 +3,7 @@ import { AIChatData } from "state/type";
 
 export interface ChatRowProps {
   style: StyleProp<ViewStyle>;
+  type: "question" | "answer";
 }
 
 export interface ChatBubbleProps {

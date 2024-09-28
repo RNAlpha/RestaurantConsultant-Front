@@ -4,11 +4,10 @@ import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { ContainerWithHeader } from "@_layout/index";
 import { Prompt } from "@_components/prompt";
 import { useState } from "react";
-import { AIChat, MyChat } from "@_components/ChatRelated";
+import { ChatRowSet } from "@_components/ChatRelated";
 import { useSelector } from "react-redux";
 import { chatQuery } from "state/slice";
 import store, { RootState } from "state/store";
-import { Fragment } from "react";
 
 export default function ChatScreen({
   navigation,
@@ -36,10 +35,7 @@ export default function ChatScreen({
           }}
         >
           {chatData.data.map((data) => (
-            <Fragment key={data.requestId}>
-              <MyChat text={data.question}></MyChat>
-              <AIChat text={data.answer}></AIChat>
-            </Fragment>
+            <ChatRowSet key={data.requestId} data={data}></ChatRowSet>
           ))}
         </ScrollView>
         <Prompt

@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, Animated } from "react-native";
 import { FloatElementUI } from "@_components/UI/Float";
 import {
   ChatBubbleProps,
@@ -7,11 +7,19 @@ import {
   ChatRowSetProps,
 } from "./type";
 import { ASSETS } from "@_assets/assets";
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 
-function ChatRow({ style, children }: React.PropsWithChildren<ChatRowProps>) {
+function ChatRow({
+  style,
+  children,
+  type,
+}: React.PropsWithChildren<ChatRowProps>) {
   return (
-    <FloatElementUI duration={500} startOffset={5}>
+    <FloatElementUI
+      duration={500}
+      startOffset={5}
+      delay={type === "question" ? 0 : 200}
+    >
       <View
         style={[
           {
@@ -35,10 +43,12 @@ function ChatBubble({
     <View
       style={[
         {
-          width: "60%",
+          width: "auto",
           borderRadius: 10,
           paddingVertical: 7,
           paddingHorizontal: 10,
+          height: 35,
+          justifyContent: "center",
         },
         style,
       ]}
@@ -50,7 +60,7 @@ function ChatBubble({
 
 export function MyChat({ text }: ChatProps) {
   return (
-    <ChatRow style={{ alignItems: "flex-end" }}>
+    <ChatRow style={{ alignItems: "flex-end" }} type="question">
       <ChatBubble style={{ backgroundColor: ASSETS.main }}>
         <Text style={{ textAlign: "right" }}>{text}</Text>
       </ChatBubble>
@@ -58,11 +68,111 @@ export function MyChat({ text }: ChatProps) {
   );
 }
 
+function ChatPending() {
+  const [o1, o2, o3] = [
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+    useRef(new Animated.Value(1)).current,
+  ];
+
+  const staggerAnim = () => {
+    Animated.stagger(400, [
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(o1, {
+            duration: 1000,
+            toValue: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(o1, {
+            duration: 1000,
+            toValue: 1,
+            useNativeDriver: true,
+          }),
+        ])
+      ),
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(o2, {
+            duration: 1000,
+            toValue: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(o2, {
+            duration: 1000,
+            toValue: 1,
+            useNativeDriver: true,
+          }),
+        ])
+      ),
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(o3, {
+            duration: 1000,
+            toValue: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(o3, {
+            duration: 1000,
+            toValue: 1,
+            useNativeDriver: true,
+          }),
+        ])
+      ),
+    ]).start();
+  };
+
+  useEffect(() => {
+    staggerAnim();
+  }, []);
+
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        gap: 5,
+      }}
+    >
+      <Animated.View
+        style={{
+          width: 10,
+          aspectRatio: 1,
+          borderRadius: 100,
+          backgroundColor: "black",
+          opacity: o1,
+        }}
+      ></Animated.View>
+      <Animated.View
+        style={{
+          width: 10,
+          aspectRatio: 1,
+          borderRadius: 100,
+          backgroundColor: "black",
+          opacity: o2,
+        }}
+      ></Animated.View>
+      <Animated.View
+        style={{
+          width: 10,
+          aspectRatio: 1,
+          borderRadius: 100,
+          backgroundColor: "black",
+          opacity: o3,
+        }}
+      ></Animated.View>
+    </View>
+  );
+}
+
 export function AIChat({ text }: ChatProps) {
   return (
-    <ChatRow style={{ alignItems: "flex-start" }}>
+    <ChatRow style={{ alignItems: "flex-start" }} type="answer">
       <ChatBubble style={{ backgroundColor: ASSETS.input }}>
-        <Text style={{ textAlign: "left" }}>{text}</Text>
+        {text ? (
+          <Text style={{ textAlign: "left" }}>{text}</Text>
+        ) : (
+          <ChatPending />
+        )}
       </ChatBubble>
     </ChatRow>
   );
@@ -70,7 +180,7 @@ export function AIChat({ text }: ChatProps) {
 
 export function ChatRowSet({ data }: ChatRowSetProps) {
   return (
-    <Fragment key={data.requestId}>
+    <Fragment>
       <MyChat text={data.question}></MyChat>
       <AIChat text={data.answer}></AIChat>
     </Fragment>
