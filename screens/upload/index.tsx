@@ -1,5 +1,4 @@
 import {
-  View,
   TouchableOpacity,
   Text,
   useWindowDimensions,
@@ -24,11 +23,8 @@ import { RootStackParamList } from "@_screens/type";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 
-import {
-  ImageUploadPrompt,
-  PromptPreview,
-  SubmitButton,
-} from "@_components/upload/index";
+import { PromptPreview, SubmitButton } from "@_components/upload/index";
+import { Prompt } from "@_components/prompt";
 import { ContainerWithHeader } from "@_layout/index";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -126,10 +122,11 @@ export default function UploadScreen({
               {submittedPrompt && image && <SubmitButton />}
             </Pressable>
           </ScrollView>
-          <ImageUploadPrompt
+          <Prompt
             prompt={prompt}
             onChange={(prompt) => setPrompt(prompt)}
             submit={(prompt) => setSubmittedPrompt(prompt)}
+            placeholder="AI에게 요구할 사항을 적어보세요!"
           />
 
           <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>

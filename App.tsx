@@ -9,6 +9,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Camera from "./components/camera";
 import SignUpScreen from "@_screens/signup";
 import MainScreen from "@_screens/main";
+import ChatScreen from "@_screens/chat";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,6 +26,7 @@ export default function App() {
             <Stack.Screen name="upload" component={UploadScreen} />
             <Stack.Screen name="signup" component={SignUpScreen} />
             <Stack.Screen name="main" component={MainScreen} />
+            <Stack.Screen name="chat" component={ChatScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </AppFrame>

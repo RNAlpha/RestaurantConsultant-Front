@@ -16,5 +16,5 @@ export const SERVICE_LIST = [
     screen: "upload",
     icon: DesignConsult,
   },
-  { name: "AI 챗봇", screen: "upload", icon: AIChat },
+  { name: "AI 챗봇", screen: "chat", icon: AIChat },
 ] satisfies Service[];
