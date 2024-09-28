@@ -5,7 +5,7 @@ import { ASSETS } from "@_assets/assets";
 
 function ChatRow({ style, children }: React.PropsWithChildren<ChatRowProps>) {
   return (
-    <FloatElementUI>
+    <FloatElementUI duration={500} startOffset={5}>
       <View
         style={[
           {
