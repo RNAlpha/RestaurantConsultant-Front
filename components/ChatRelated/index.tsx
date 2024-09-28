@@ -1,7 +1,13 @@
 import { Text, View } from "react-native";
 import { FloatElementUI } from "@_components/UI/Float";
-import { ChatBubbleProps, ChatProps, ChatRowProps } from "./type";
+import {
+  ChatBubbleProps,
+  ChatProps,
+  ChatRowProps,
+  ChatRowSetProps,
+} from "./type";
 import { ASSETS } from "@_assets/assets";
+import { Fragment } from "react";
 
 function ChatRow({ style, children }: React.PropsWithChildren<ChatRowProps>) {
   return (
@@ -59,5 +65,14 @@ export function AIChat({ text }: ChatProps) {
         <Text style={{ textAlign: "left" }}>{text}</Text>
       </ChatBubble>
     </ChatRow>
+  );
+}
+
+export function ChatRowSet({ data }: ChatRowSetProps) {
+  return (
+    <Fragment key={data.requestId}>
+      <MyChat text={data.question}></MyChat>
+      <AIChat text={data.answer}></AIChat>
+    </Fragment>
   );
 }

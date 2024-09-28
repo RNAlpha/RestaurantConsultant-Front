@@ -5,10 +5,19 @@ import { ContainerWithHeader } from "@_layout/index";
 import { Prompt } from "@_components/prompt";
 import { useState } from "react";
 import { AIChat, MyChat } from "@_components/ChatRelated";
+import { useSelector } from "react-redux";
+import { chatQuery } from "state/slice";
+import store, { RootState } from "state/store";
+import { Fragment } from "react";
 
 export default function ChatScreen({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "chat">) {
+  const submitChat = (prompt: string) => {
+    store.dispatch(chatQuery(prompt));
+  };
+  const chatData = useSelector((state: RootState) => state.chat);
+
   const [prompt, setPrompt] = useState<string>("");
 
   return (
@@ -26,14 +35,17 @@ export default function ChatScreen({
             paddingTop: 20,
           }}
         >
-          <MyChat text="adadaad"></MyChat>
-          <MyChat text="adadaad"></MyChat>
-          <AIChat text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lobortis varius massa a fringilla. Sed at risus suscipit, varius quam ut, pharetra nisi. Aliquam erat volutpat. Donec porttitor, ipsum eget cursus volutpat, ipsum sapien mattis ligula, quis sagittis orci tellus non lacus. Aenean porttitor venenatis justo nec pellentesque. Integer nec est eu metus facilisis varius at nec quam. Sed felis quam, luctus ut ligula eu, facilisis tempus velit. Donec hendrerit, justo ac maximus vestibulum, justo ligula imperdiet quam, quis volutpat nunc lorem in ligula. Aliquam id ante felis. Integer lobortis feugiat consequat."></AIChat>
+          {chatData.data.map((data) => (
+            <Fragment key={data.requestId}>
+              <MyChat text={data.question}></MyChat>
+              <AIChat text={data.answer}></AIChat>
+            </Fragment>
+          ))}
         </ScrollView>
         <Prompt
           prompt={prompt}
           onChange={(prompt) => setPrompt(prompt)}
-          submit={(prompt) => {}}
+          submit={() => submitChat(prompt)}
           placeholder="AI에게 물어보고 싶은 것을 적어보세요!"
         ></Prompt>
       </KeyboardAvoidingView>

@@ -1,4 +1,5 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
+import { AIChatData } from "state/type";
 
 export interface ChatRowProps {
   style: StyleProp<ViewStyle>;
@@ -10,4 +11,8 @@ export interface ChatBubbleProps {
 
 export interface ChatProps {
   text: string;
+}
+
+export interface ChatRowSetProps {
+  data: AIChatData;
 }
