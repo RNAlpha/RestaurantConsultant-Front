@@ -8,7 +8,7 @@ import { FloatElementUI } from "@_components/UI/Float";
 
 export function SubmitButton() {
   return (
-    <FloatElementUI duration={1000}>
+    <FloatElementUI duration={1000} startOffset={20}>
       <TouchableOpacity style={[SBS["submit-button"]]}>
         <Text style={SBS["submit-button-text"]}>AI 컨설팅 받기</Text>
       </TouchableOpacity>
@@ -18,7 +18,7 @@ export function SubmitButton() {
 
 export function PromptPreview({ prompt }: PromptPreviewProps) {
   return (
-    <FloatElementUI duration={1000}>
+    <FloatElementUI duration={1000} startOffset={20}>
       <TouchableOpacity style={PPS["prompt-preview"]}>
         <Text style={PPS["prompt-preview-text"]}>{prompt}</Text>
       </TouchableOpacity>
